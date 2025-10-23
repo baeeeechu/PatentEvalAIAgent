@@ -4,7 +4,9 @@ Objective: 특허의 기술성, 권리성, 활용성을 객관적으로 평가�
 
 Methods:
 정량평가 (60~70%): PDF 원문에서 추출한 10개 정량 지표 (X1X10) + 구조방정식 모델
+
 정성평가 (30~40%): RAG 기반 LLM 평가 + Binary 체크리스트
+
 웹 서치: 출원인 시장 지위 + 기술 분야 성장성 (DuckDuckGo)
 
 ## Tools:
@@ -46,7 +48,8 @@ LLM 정성 평가: RAG 컨텍스트 기반 강점/약점 분석
 기술 분야 평가: IPC 코드 기반 성장성 분석
 
 ## Tech Stack
-CategoryDetailsFrameworkLangChain, Python 3.11LLMGPT-4o-mini (OpenAI API)RetrievalFAISS, RecursiveCharacterTextSplitterEmbeddingKoE5 (nlpai-lab/KoE5 via HuggingFace)PDF ProcessingPyMuPDF (fitz), pdfplumberDocument Generationpython-docxVisualizationMatplotlib, SeabornWeb SearchDuckDuckGo Search APIEnvironmentPoetry (dependency management)
+Category Details Framework LangChain, 
+LLM GPT-4o-mini(OpenAI API) RetrievalFAISS, RecursiveCharacterTextSplitterEmbeddingKoE5 (nlpai-lab/KoE5 via HuggingFace)PDF ProcessingPyMuPDF (fitz), pdfplumberDocument Generationpython-docxVisualizationMatplotlib, SeabornWeb SearchDuckDuckGo Search APIEnvironmentPoetry (dependency management)
 
 ## Agents
 1️⃣ TechnologyAgent (기술성 평가)
@@ -131,6 +134,7 @@ state = {
 
 
 ##  Directory Structure
+'''
 PatentEvalAIAgent/
 ├── data/                          # 특허 PDF 파일
 │   ├── patent1samsung.pdf
@@ -174,6 +178,7 @@ PatentEvalAIAgent/
 ├── pyproject.toml                 # Poetry 의존성 관리
 ├── .env                           # 환경 변수 (OpenAI API Key)
 └── README.md                      # 프로젝트 문서
+'''
 
 ## Architecture
 <img width="276" height="1470" alt="image" src="https://github.com/user-attachments/assets/fec9a87b-d608-4a7b-8fe2-863034598837" />
