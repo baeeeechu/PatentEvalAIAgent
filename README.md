@@ -133,23 +133,10 @@ state = {
 }
 
 
-##  Directory Structure
-| 파일 | 설명 |
-|------|------|
-| [`main.py`](main.py) | 실행 스크립트 |
-| [`agents/tech_agent.py`](agents/tech_agent.py) | 기술성 평가 |
-```
 
----
-
-## 🎯 최종 결과 미리보기
-
-GitHub에서 이렇게 표시됩니다:
-
----
 
 ## 📂 Directory Structure
-```
+
 PatentEvalAIAgent/
 ├── data/                          # 특허 PDF 파일
 │   ├── patent1samsung.pdf
