@@ -134,7 +134,22 @@ state = {
 
 
 ##  Directory Structure
-'''
+| 파일 | 설명 |
+|------|------|
+| [`main.py`](main.py) | 실행 스크립트 |
+| [`agents/tech_agent.py`](agents/tech_agent.py) | 기술성 평가 |
+```
+
+---
+
+## 🎯 최종 결과 미리보기
+
+GitHub에서 이렇게 표시됩니다:
+
+---
+
+## 📂 Directory Structure
+```
 PatentEvalAIAgent/
 ├── data/                          # 특허 PDF 파일
 │   ├── patent1samsung.pdf
@@ -148,21 +163,21 @@ PatentEvalAIAgent/
 │   └── market_agent.py           # 활용성 평가 (v5.0)
 │
 ├── prompts/                       # 프롬프트 템플릿
-│   ├── tech_eval.txt             # 기술성 정성 평가 프롬프트
-│   ├── rights_eval.txt           # 권리성 정성 평가 프롬프트
-│   └── market_eval.txt           # 활용성 정성 평가 프롬프트
+│   ├── tech_eval.txt
+│   ├── rights_eval.txt
+│   └── market_eval.txt
 │
 ├── config/                        # 설정 파일
 │   ├── __init__.py
-│   ├── weights.py                # 평가 가중치 설정
-│   └── patents.py                # 특허 파일 목록
+│   ├── weights.py
+│   └── patents.py
 │
 ├── utils/                         # 유틸리티 모듈
 │   ├── __init__.py
-│   ├── pdf_processor.py          # PDF 파싱 및 메타데이터 추출
-│   ├── rag_manager.py            # RAG 시스템 (FAISS + KoE5)
-│   ├── visualizer.py             # 차트 생성 (막대, 레이더)
-│   └── docx_generator.py         # DOCX 보고서 생성
+│   ├── pdf_processor.py
+│   ├── rag_manager.py
+│   ├── visualizer.py
+│   └── docx_generator.py
 │
 ├── outputs/                       # 평가 결과 저장
 │   ├── {patent_number}_report.docx
@@ -174,11 +189,10 @@ PatentEvalAIAgent/
 │   ├── index.faiss
 │   └── index.pkl
 │
-├── main.py                        # 실행 스크립트
-├── pyproject.toml                 # Poetry 의존성 관리
-├── .env                           # 환경 변수 (OpenAI API Key)
-└── README.md                      # 프로젝트 문서
-'''
+├── main.py
+├── pyproject.toml
+├── .env
+└── README.md
 
 ## Architecture
 <img width="276" height="1470" alt="image" src="https://github.com/user-attachments/assets/fec9a87b-d608-4a7b-8fe2-863034598837" />
