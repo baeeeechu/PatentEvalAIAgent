@@ -1,0 +1,57 @@
+{
+  "patent_basic_info": {
+    "patent_number": "10-2025-0090445",
+    "title": "LLM 기반 고객 상담 서비스 제공 방법 및 장치",
+    "applicant": "삼성생명보험주식회사",
+    "application_date": null,
+    "ipc_codes": [
+      "G06Q30/0281",
+      "G10L15/26",
+      "G06F16/338",
+      "G06F16/3349",
+      "G06F40/295",
+      "G06F16/33",
+      "G06N3/04",
+      "G06F16/332",
+      "G06F16/3329",
+      "G06F16/3334"
+    ],
+    "claims_count": 15,
+    "abstract_summary": "초록 정보 없음",
+    "representative_claim_summary": "청구항 정보 없음"
+  },
+  "quantitative_metrics": {
+    "X1_ipc_count": 10,
+    "X2_independent_claims": 0,
+    "X3_dependent_claims": 0,
+    "X4_total_claims": 15,
+    "X5_independent_avg_length": 0,
+    "X6_dependent_avg_length": 0,
+    "X7_drawing_count": 5,
+    "X8_title_length": 27,
+    "X9_claim_series": 0,
+    "X10_inventor_count": 2
+  },
+  "binary_checklist": {
+    "has_multiple_ipc": true,
+    "has_sufficient_claims": true,
+    "has_detailed_independent_claim": false,
+    "has_drawing_support": true,
+    "has_multiple_inventors": true,
+    "has_clear_title": true,
+    "has_dependent_hierarchy": true,
+    "no_data_missing": false
+  },
+  "structural_equation_scores": {
+    "rights_strength": 46.0,
+    "technical_quality": 43.3,
+    "utilization_potential": 11.1,
+    "overall_score": 34.6,
+    "final_grade": "미달"
+  },
+  "evidence": {
+    "rights_evidence": "IPC 10개, 청구항 15개 (독립항 0개, 종속항 0개)",
+    "technical_evidence": "도면 5개, 청구항 계열 0개, 발명명칭 27자",
+    "utilization_evidence": "발명자 2명"
+  }
+}

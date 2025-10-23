@@ -1,0 +1,55 @@
+{
+  "patent_basic_info": {
+    "patent_number": "10-2024-0194841",
+    "title": "LLM을 활용하여 사용자 질의를 분석하고 상담원의 상담 서비스를 보조하기 위한 서버 및 그",
+    "applicant": "주식회사 와이넥스트",
+    "application_date": null,
+    "ipc_codes": [
+      "G06F16/3344",
+      "G06F16/338",
+      "G06F16/334",
+      "G06F16/3329",
+      "G06F40/30",
+      "G06N3/08",
+      "G06F40/279",
+      "G06Q50/50"
+    ],
+    "claims_count": 7,
+    "abstract_summary": "된 정보를 나타낼 수 있고, 상담원 장치(104)의 상담원\n에게 표시될 정보일 수 있다. 예를 들어, 도 4b를 참조하면, 서버(101)는 입력 텍스트 데이터(430)를 제1 LLM에\n입력하여 사용자 의도 정보(431)와 함께 요청 정보(434)(예: structured_request)로서 \"예약번호 56789  취소\n요청(대기 시간 불만)\"을 식별할 수 있다. 요청 정보의 포맷은 전술한 예에 한정되지 않고, 다양한 포맷으로 요\n청 정보가 구현될 수 있다. 일 실시예에 따르면, 전술한 숫자 정보 또는 요청 정보는 컨텍스트 정보의 일부로서 구현될 수 있다.",
+    "representative_claim_summary": "청구항 정보 없음"
+  },
+  "quantitative_metrics": {
+    "X1_ipc_count": 8,
+    "X2_independent_claims": 0,
+    "X3_dependent_claims": 0,
+    "X4_total_claims": 7,
+    "X5_independent_avg_length": 0,
+    "X6_dependent_avg_length": 0,
+    "X7_drawing_count": 6,
+    "X8_title_length": 50,
+    "X9_claim_series": 0,
+    "X10_inventor_count": 1
+  },
+  "binary_checklist": {
+    "has_multiple_ipc": true,
+    "has_sufficient_claims": false,
+    "has_detailed_independent_claim": false,
+    "has_drawing_support": true,
+    "has_multiple_inventors": false,
+    "has_clear_title": true,
+    "has_dependent_hierarchy": true,
+    "no_data_missing": false
+  },
+  "structural_equation_scores": {
+    "rights_strength": 33.2,
+    "technical_quality": 46.0,
+    "utilization_potential": 0,
+    "overall_score": 27.7,
+    "final_grade": "미달"
+  },
+  "evidence": {
+    "rights_evidence": "IPC 8개, 청구항 7개 (독립항 0개, 종속항 0개)",
+    "technical_evidence": "도면 6개, 청구항 계열 0개, 발명명칭 50자",
+    "utilization_evidence": "발명자 1명"
+  }
+}

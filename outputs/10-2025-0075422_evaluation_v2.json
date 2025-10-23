@@ -1,0 +1,55 @@
+{
+  "patent_basic_info": {
+    "patent_number": "10-2025-0075422",
+    "title": "언어 모델을 이용한 상담 데이터 추론 방법 및 이를 수행하는 컴퓨팅 장치",
+    "applicant": "주식회사 카카오뱅크",
+    "application_date": null,
+    "ipc_codes": [
+      "G06F40/284",
+      "G10L15/26",
+      "G06F16/345",
+      "G06N3/045",
+      "G06F16/34",
+      "G06N3/096",
+      "G06F18/10",
+      "G06F16/35"
+    ],
+    "claims_count": 20,
+    "abstract_summary": "데이터를 생성함으로써, 데이터 처리의\n효율성을 향상시킬 수 있다. 대 표 도 - 도2\n공개특허 10-2025-0075422\n- 1 -\n공개특허10-2025-0075422\n\n(52) CPC특허분류\n     G06F 18/10 (2025.01)\n     G06F 40/284 (2020.01)\n     G06N 3/045 (2023.01)\n     G06N 3/096 (2023.01)\n     G10L 15/26 (2013.01)\n(72) 발명자\n손재의\n경기도 성남시 분당구 분당내곡로 131, 11층\n윤지선\n경기도 성남시 분당구 분당내곡로 131, 11층\n신동화\n경기도 성남시 분당구 분당내곡로 131, 11층\n전상현\n경기도 성남시 분당구 분당내곡로 131, 11층\n한승희\n경기도 성남시 분당구 분당내곡로 131, 11층\n노단비\n경기도 성남시 분당구 분당내곡로 131, 11층\n공개특허 10-2025-0075422\n- 2 -\n\n명 세 서\n청구범위\n청구항 1 \n컴퓨팅 장치에서 수행되는 언어 모델",
+    "representative_claim_summary": "청구항 정보 없음"
+  },
+  "quantitative_metrics": {
+    "X1_ipc_count": 8,
+    "X2_independent_claims": 0,
+    "X3_dependent_claims": 0,
+    "X4_total_claims": 20,
+    "X5_independent_avg_length": 0,
+    "X6_dependent_avg_length": 0,
+    "X7_drawing_count": 10,
+    "X8_title_length": 40,
+    "X9_claim_series": 0,
+    "X10_inventor_count": 2
+  },
+  "binary_checklist": {
+    "has_multiple_ipc": true,
+    "has_sufficient_claims": true,
+    "has_detailed_independent_claim": false,
+    "has_drawing_support": true,
+    "has_multiple_inventors": true,
+    "has_clear_title": true,
+    "has_dependent_hierarchy": true,
+    "no_data_missing": false
+  },
+  "structural_equation_scores": {
+    "rights_strength": 54.0,
+    "technical_quality": 56.7,
+    "utilization_potential": 11.1,
+    "overall_score": 42.1,
+    "final_grade": "미달"
+  },
+  "evidence": {
+    "rights_evidence": "IPC 8개, 청구항 20개 (독립항 0개, 종속항 0개)",
+    "technical_evidence": "도면 10개, 청구항 계열 0개, 발명명칭 40자",
+    "utilization_evidence": "발명자 2명"
+  }
+}
