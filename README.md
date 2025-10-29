@@ -27,46 +27,6 @@
 | 55~64 | B | 개선 필요 |
 | 0~54 | D | 부족 |
 
----
-
-## Tools
-
-본 시스템에서 사용하는 핵심 도구들입니다.
-
-### 1. PDF Processing
-
-| 도구 | 용도 | 버전 |
-|------|------|------|
-| **pdfplumber** | PDF 텍스트 추출 | 0.10+ |
-| **PyPDF2** | PDF 메타데이터 | 3.0+ |
-
-### 2. RAG (Retrieval-Augmented Generation)
-
-| 도구 | 용도 | 버전 |
-|------|------|------|
-| **FAISS** | 벡터 데이터베이스 | 1.7+ |
-| **OpenAI Embeddings** | 텍스트 임베딩 | text-embedding-3-small |
-| **LangChain** | RAG 오케스트레이션 | 0.1.0+ |
-
-### 3. LLM (Large Language Model)
-
-| 도구 | 용도 | 버전 |
-|------|------|------|
-| **OpenAI GPT-4o-mini** | 정성 평가 | Latest |
-| **LangChain** | LLM 체인 관리 | 0.1.0+ |
-
-### 4. Web Search
-
-| 도구 | 용도 | 버전 |
-|------|------|------|
-| **DuckDuckGo Search** | 실시간 웹 검색 | Latest |
-
-### 5. Document Generation
-
-| 도구 | 용도 | 버전 |
-|------|------|------|
-| **python-docx** | DOCX 생성 | 1.1+ |
-| **matplotlib** | 그래프 생성 | 3.8+ |
 
 ---
 
@@ -392,7 +352,7 @@ docx_generator.generate(state)
 ```
 ---
 
-## 🔧 Tech Stack
+## Tech Stack
 
 ### Core Framework
 
@@ -457,7 +417,7 @@ docx_generator.generate(state)
 
 ---
 
-## 📦 State
+## State
 
 State는 모든 에이전트가 공유하는 중앙 데이터 구조
 
@@ -506,81 +466,6 @@ state = {
 
 ---
 
-### State 예시 (실제 데이터)
-
-```python
-{
-    # 입력
-    "current_patent": "patents/10-2025-0090445.pdf",
-    "patent_info": {
-        "number": "10-2025-0090445",
-        "title": "LLM 기반 고객 상담 서비스 제공 방법 및 장치",
-        "applicant": "삼성생명보험주식회사",
-        "inventors": ["김철수", "이영희"],
-        "ipc_codes": ["G06F 16/33 (2025.01)", "G06F 16/332 (2025.01)"],
-        "claims": ["청구항 1...", "청구항 2...", ...],
-        "claims_count": 15,
-        "drawing_count": 3,
-        "title_length": 27
-    },
-    
-    # TechnologyAgent 결과
-    "tech_score": 82.5,
-    "tech_metrics": {
-        "X7_drawing_count": 3,
-        "X8_title_length": 27,
-        "X9_claim_series": 15
-    },
-    "tech_qualitative": {
-        "innovation_summary": "LLM과 RAG를 결합한 혁신적 접근으로...",
-        "implementation_summary": "15개 청구항과 3개 도면으로 알고리즘이...",
-        "differentiation_summary": "선행기술 대비 컨텍스트 이해도가 월등히...",
-        "practicality_summary": "즉시 상용화 가능한 수준의 완성도..."
-    },
-    
-    # RightsAgent 결과
-    "rights_score": 78.3,
-    "rights_metrics": {
-        "X1_ipc_count": 2,
-        "X2_independent_claims": 3,
-        "X3_dependent_claims": 12,
-        "X4_total_claims": 15,
-        "X5_independent_avg_length": 287.5,
-        "X6_dependent_avg_length": 156.3
-    },
-    "rights_qualitative": {
-        "scope_summary": "IPC 2개 분류로 15개 청구항에 걸쳐...",
-        "robustness_summary": "독립항 평균 287자, 종속항 12개로...",
-        "avoidance_summary": "핵심 기술 요소를 3개 독립항으로..."
-    },
-    
-    # MarketAgent 결과
-    "market_score": 87.5,
-    "market_metrics": {
-        "X10_inventor_count": 2,
-        "applicant": "삼성생명보험주식회사",
-        "ipc_count": 2
-    },
-    "market_web_search": {
-        "applicant_grade": "A",
-        "applicant_summary": "삼성생명보험은 국내 1위 생명보험사로...",
-        "tech_grade": "High",
-        "tech_summary": "AI 기반 고객 서비스는 고성장 분야로..."
-    },
-    "market_qualitative": {
-        "applicability_summary": "G06F 16/33 분야에서 즉시 적용 가능하며...",
-        "market_fit_summary": "A 등급 출원인의 기술로서 High 성장성을...",
-        "commercialization_summary": "상용화 단계로 진행 가능하며..."
-    },
-    
-    # 최종 결과
-    "final_score": 82.3,
-    "final_grade": "BBB"
-}
-```
-
----
-
 ### State 접근 패턴
 
 ```python
@@ -624,9 +509,6 @@ def generate_report(state: Dict) -> str:
 patent-evaluation-system/
 │
 ├── 📄 README.md                     # 프로젝트 메인 문서
-├── 📄 QUICKSTART.md                 # 빠른 시작 가이드
-├── 📄 CHANGELOG.md                  # 변경 이력
-├── 📄 LICENSE                       # 라이선스
 │
 ├── 📁 agents/                       # AI 에이전트
 │   ├── __init__.py
@@ -661,91 +543,8 @@ patent-evaluation-system/
 ├── 📄 pyproject.toml                #  Poetry 패키지 설정
 ├── 📄 poetry.lock                   #  의존성 잠금 파일
 ├── 📄 .env                          #  환경 변수 (생성 필요)
-├── 📄 .env.example                  #  환경 변수 예시
 └── 📄 .gitignore                    #  Git 제외 파일
 ```
-
----
-
-### 주요 모듈 설명
-
-#### `agents/`
-각 평가 영역을 담당하는 독립적인 에이전트들입니다.
-
-```python
-# agents/tech_agent.py
-class TechnologyAgent:
-    def __init__(self):
-        self.llm = ChatOpenAI(model="gpt-4o-mini")
-    
-    def evaluate(self, state: Dict) -> Dict:
-        # RAG 검색 → 정량 계산 → LLM 평가 → State 업데이트
-        pass
-
-# agents/rights_agent.py
-class RightsAgent:
-    def evaluate(self, state: Dict) -> Dict:
-        # 청구항 분석 → 정량 계산 → LLM 평가 → State 업데이트
-        pass
-
-# agents/market_agent.py
-class MarketAgent:
-    def evaluate(self, state: Dict) -> Dict:
-        # 웹 검색 → 정량 계산 → LLM 평가 → State 업데이트
-        pass
-```
-
----
-
-#### `utils/`
-공통으로 사용되는 유틸리티 모듈들입니다.
-
-```python
-# utils/pdf_processor.py
-class PDFProcessor:
-    def process(self, pdf_path: str) -> Dict:
-        # PDF → 텍스트 + 메타데이터
-        pass
-
-# utils/rag_manager.py
-class RAGManager:
-    def build_vectorstore(self, documents: List) -> None:
-        # 문서 → FAISS 벡터 DB
-        pass
-    
-    def search(self, query: str, k: int = 5) -> List:
-        # 의미론적 유사도 검색
-        pass
-
-# utils/docx_generator.py
-class DOCXGenerator:
-    def generate(self, state: Dict) -> str:
-        # State → DOCX 보고서
-        pass
-
-# utils/grade_calculator.py
-def calculate_grade(score: float) -> str:
-    # 점수 → 등급 (AAA~D)
-    pass
-```
-
----
-
-#### `prompts/`
-LLM에 전달되는 프롬프트 템플릿들입니다.
-
-```
-prompts/
-├── tech_eval.txt      # "당신은 특허 기술성 평가 전문가입니다..."
-├── rights_eval.txt    # "당신은 특허 권리성 평가 전문가입니다..."
-└── market_eval.txt    # "당신은 특허 활용성 평가 전문가입니다..."
-```
-
-각 프롬프트는 다음 구조를 따릅니다:
-- 역할 정의
-- 평가 기준 상세
-- 출력 형식 (JSON)
-- 예시
 
 ---
 
