@@ -19,7 +19,9 @@ from .weights import (
 
 from .patents import (
     PATENT_FILES,
-    validate_patent_files
+    validate_patent_files,
+    QUANTITATIVE_SCORING,
+    BINARY_CHECKLIST
 )
 
 __all__ = [
@@ -38,5 +40,7 @@ __all__ = [
     
     # 특허 파일
     "PATENT_FILES",
-    "validate_patent_files"
+    "validate_patent_files",
+    "QUANTITATIVE_SCORING",
+    "BINARY_CHECKLIST"
 ]

@@ -1,49 +1,93 @@
 """
-특허 파일 명시적 지정
-- 평가할 특허 PDF 파일 목록 관리
+특허 평가 관련 상수
 """
+from pathlib import Path
+from typing import List
 
-# 평가 대상 특허 파일 (data/ 디렉토리 기준)
-PATENT_FILES = [
-    {
-        "filename": "patent1samsung.pdf",
-        "company": "삼성생명",
-        "tech_area": "LLM 고객상담",
-        "priority": "high",
-        "description": "LLM 기반 고객상담 시스템의 Hallucination 방지 기술"
+# 정량 지표 계산 기준
+QUANTITATIVE_SCORING = {
+    # 권리성 지표
+    'X1_IPC_COUNT': {
+        'max': 10,
+        'scoring': lambda x: min(100, (x / 5) * 100) if x > 0 else 0
     },
-    {
-        "filename": "patent2yanolja.pdf",
-        "company": "야놀자",
-        "tech_area": "LLM 고객상담",
-        "priority": "medium",
-        "description": "숙박 플랫폼 고객 응대 LLM 시스템"
+    'X2_CLAIMS_COUNT': {
+        'max': 20,
+        'scoring': lambda x: min(100, (x / 10) * 100) if x > 0 else 0
     },
-    {
-        "filename": "patent3kakaobank.pdf",
-        "company": "카카오뱅크",
-        "tech_area": "LLM 고객상담",
-        "priority": "medium",
-        "description": "금융 서비스 AI 챗봇 시스템"
-    }
-]
+    'X3_AVG_CLAIM_LENGTH': {
+        'max': 300,
+        'scoring': lambda x: min(100, (x / 150) * 100) if x > 0 else 0
+    },
+    'X4_INDEPENDENT_CLAIMS': {
+        'max': 10,
+        'scoring': lambda x: min(100, (x / 5) * 100) if x > 0 else 0
+    },
+    'X5_DEPENDENT_CLAIMS': {
+        'max': 15,
+        'scoring': lambda x: min(100, (x / 10) * 100) if x > 0 else 0
+    },
+    'X6_DEPENDENCY_DEPTH': {
+        'max': 5,
+        'scoring': lambda x: min(100, (x / 3) * 100) if x > 0 else 0
+    },
+    
+    # 기술성 지표
+    'X7_DRAWING_COUNT': {
+        'max': 10,
+        'scoring': lambda x: min(100, (x / 5) * 100) if x > 0 else 0
+    },
+    'X8_TITLE_LENGTH': {
+        'max': 50,
+        'scoring': lambda x: min(100, (x / 30) * 100) if x > 10 else 0
+    },
+    'X9_CLAIM_SERIES': {
+        'max': 10,
+        'scoring': lambda x: min(100, (x / 5) * 100) if x > 0 else 0
+    },
+    
+    # 활용성 지표
+    'X10_INVENTORS_COUNT': {
+        'max': 10,
+        'scoring': lambda x: min(100, (x / 3) * 100) if x > 0 else 0
+    },
+}
 
-# 파일 검증
-def validate_patent_files():
-    """특허 파일 존재 여부 검증"""
-    import os
-    missing_files = []
+# 이진 체크리스트 항목
+BINARY_CHECKLIST = {
+    'technology': [
+        '도면 수 충족(3개 이상)',
+        '발명명칭 길이 적절(10자 이상)',
+        '청구항 계열 충족(3개 이상)',
+    ],
+    'rights': [
+        'IPC 코드 다양성',
+        '청구항 수 충족',
+        '독립항 존재',
+    ],
+    'market': [
+        '발명자 수 충족',
+    ]
+}
+
+# 특허 파일 목록 (pdfs 폴더에서 자동 탐색)
+PATENT_FILES = []
+
+
+def validate_patent_files() -> List[str]:
+    """
+    pdfs 폴더에서 PDF 파일들을 찾아서 반환
+    """
+    pdf_dir = Path("pdfs")
     
-    for patent in PATENT_FILES:
-        filepath = os.path.join("data", patent["filename"])
-        if not os.path.exists(filepath):
-            missing_files.append(filepath)
+    if not pdf_dir.exists():
+        print(f"⚠️ 경고: {pdf_dir} 폴더가 없습니다.")
+        return []
     
-    if missing_files:
-        print(f"⚠️ 다음 파일을 찾을 수 없습니다:")
-        for f in missing_files:
-            print(f"   - {f}")
-        return False
+    pdf_files = list(pdf_dir.glob("*.pdf"))
     
-    print(f"✅ 모든 특허 파일 확인 완료 ({len(PATENT_FILES)}개)")
-    return True
+    if not pdf_files:
+        print(f"⚠️ 경고: {pdf_dir} 폴더에 PDF 파일이 없습니다.")
+        return []
+    
+    return [str(f) for f in sorted(pdf_files)]

@@ -13,7 +13,7 @@ from langchain_community.vectorstores import FAISS
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain.docstore.document import Document
 
-from utils.pdf_processor import PatentPDFProcessor
+from utils.pdf_processor import PDFProcessor
 
 
 class PatentRAGManager:
@@ -53,13 +53,17 @@ class PatentRAGManager:
                 print(f"  처리 중: {Path(pdf_path).name}")
                 
                 # PDF 파싱
-                processor = PatentPDFProcessor(pdf_path)
-                metadata = processor.extract_metadata()
-                chunks = processor.get_text_chunks(
+                processor = PDFProcessor(pdf_path)
+                patent_data = processor.process()
+                metadata = patent_data['metadata']
+                
+                # 텍스트를 청크로 분할
+                text_splitter = RecursiveCharacterTextSplitter(
                     chunk_size=self.chunk_size,
-                    overlap=self.chunk_overlap
+                    chunk_overlap=self.chunk_overlap,
+                    length_function=len,
                 )
-                processor.close()
+                chunks = text_splitter.split_text(patent_data['text'])
                 
                 # Document 객체 생성
                 for i, chunk in enumerate(chunks):

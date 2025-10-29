@@ -46,10 +46,22 @@ def calculate_percentile(score: float) -> float:
     간이 백분위 계산 (정규분포 가정)
     실제로는 과거 특허 데이터베이스와 비교 필요
     """
-    # 평균 70, 표준편차 10 가정
-    from scipy import stats
-    percentile = stats.norm.cdf(score, loc=70, scale=10) * 100
-    return round(percentile, 1)
+    try:
+        from scipy import stats
+        percentile = stats.norm.cdf(score, loc=70, scale=10) * 100
+        return round(percentile, 1)
+    except ImportError:
+        # scipy 없으면 간단한 계산
+        if score >= 90:
+            return 95.0
+        elif score >= 80:
+            return 85.0
+        elif score >= 70:
+            return 70.0
+        elif score >= 60:
+            return 50.0
+        else:
+            return 30.0
 
 # 평가 항목별 세부 기준 (R&D 팀 관점)
 TECH_EVALUATION_CRITERIA = {
