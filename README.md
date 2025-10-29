@@ -29,7 +29,7 @@
 
 ---
 
-## 🛠️ Tools
+## Tools
 
 본 시스템에서 사용하는 핵심 도구들입니다.
 
@@ -40,25 +40,6 @@
 | **pdfplumber** | PDF 텍스트 추출 | 0.10+ |
 | **PyPDF2** | PDF 메타데이터 | 3.0+ |
 
-**처리 과정**:
-```python
-# 1. 텍스트 추출
-text = pdfplumber.extract_text(pdf_path)
-
-# 2. 메타데이터 파싱
-metadata = {
-    "patent_number": extract_patent_number(text),
-    "title": extract_title(text),
-    "applicant": extract_applicant(text),
-    "inventors": extract_inventors(text),
-    "ipc_codes": extract_ipc_codes(text),
-    "claims": extract_claims(text),
-    "drawing_count": count_drawings(pdf),
-}
-```
-
----
-
 ### 2. RAG (Retrieval-Augmented Generation)
 
 | 도구 | 용도 | 버전 |
@@ -67,37 +48,6 @@ metadata = {
 | **OpenAI Embeddings** | 텍스트 임베딩 | text-embedding-3-small |
 | **LangChain** | RAG 오케스트레이션 | 0.1.0+ |
 
-**RAG 워크플로우**:
-```python
-# 1. 문서 청크 분할
-chunks = text_splitter.split_text(
-    text=patent_text,
-    chunk_size=500,
-    chunk_overlap=50
-)
-
-# 2. 벡터 임베딩
-embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
-
-# 3. FAISS 인덱싱
-vectorstore = FAISS.from_documents(
-    documents=chunks,
-    embedding=embeddings
-)
-
-# 4. 의미론적 검색
-relevant_chunks = vectorstore.similarity_search(
-    query="기술적 특징 알고리즘",
-    k=5
-)
-```
-
-- 전체 PDF 텍스트가 아닌 **관련 청크만** LLM에 전달 (토큰 절약)
-- 의미론적 유사도 기반 정밀 검색
-- 컨텍스트 기반 평가로 정확도 향상
-
----
-
 ### 3. LLM (Large Language Model)
 
 | 도구 | 용도 | 버전 |
@@ -105,82 +55,11 @@ relevant_chunks = vectorstore.similarity_search(
 | **OpenAI GPT-4o-mini** | 정성 평가 | Latest |
 | **LangChain** | LLM 체인 관리 | 0.1.0+ |
 
-**프롬프트 엔지니어링 예시**:
-```python
-prompt = """
-당신은 특허 기술성 평가 전문가입니다.
-
-[특허 정보]
-{patent_info}
-
-[RAG 검색 컨텍스트]
-{rag_context}
-
-다음 기준으로 평가하세요:
-1. 기술적 혁신성 (0-100점)
-2. 구현 상세도 (0-100점)
-3. 기술적 차별성 (0-100점)
-4. 실용성 (0-100점)
-
-JSON 형식으로 응답:
-{
-    "innovation_score": 85,
-    "innovation_rationale": "상세한 근거...",
-    "implementation_score": 75,
-    "implementation_rationale": "상세한 근거...",
-    ...
-}
-"""
-```
-
-**최적화**:
-- Temperature: **0.1** (일관성 우선)
-- Max Tokens: **2000** (충분한 서술)
-
----
-
 ### 4. Web Search
 
 | 도구 | 용도 | 버전 |
 |------|------|------|
 | **DuckDuckGo Search** | 실시간 웹 검색 | Latest |
-
-**검색 전략**:
-```python
-# 1. 출원인 시장 지위 조사
-applicant_results = ddgs.text(
-    f"{applicant} 기업 정보 시장 지위",
-    max_results=2
-)
-
-# 2. 등급 산정 (A/B/C)
-if "대기업" in results or "상장" in results:
-    grade = "A"
-elif "중견" in results or "중소" in results:
-    grade = "B"
-else:
-    grade = "C"
-
-# 3. 기술 분야 성장성 분석
-tech_results = ddgs.text(
-    f"{ipc_code} 기술 분야 성장성 전망",
-    max_results=2
-)
-
-# 4. 성장성 평가 (High/Medium/Low)
-if "고성장" in results or "확대" in results:
-    growth = "High"
-elif "성장" in results:
-    growth = "Medium"
-else:
-    growth = "Low"
-```
-
-**활용**:
-- 출원인 시장 지위 평가 (활용성 평가의 35%)
-- 기술 분야 성장성 평가 (활용성 평가의 35%)
-
----
 
 ### 5. Document Generation
 
@@ -188,34 +67,6 @@ else:
 |------|------|------|
 | **python-docx** | DOCX 생성 | 1.1+ |
 | **matplotlib** | 그래프 생성 | 3.8+ |
-
-**보고서 생성 과정**:
-```python
-# 1. 문서 초기화
-doc = Document()
-
-# 2. 표지 생성
-add_cover_page(doc, patent_info, final_score, grade)
-
-# 3. Summary 섹션
-add_summary(doc, strengths, weaknesses, recommendations)
-
-# 4. 상세 평가
-add_tech_section(doc, tech_evaluation)
-add_rights_section(doc, rights_evaluation)
-add_market_section(doc, market_evaluation)
-
-# 5. Appendix
-add_appendix(doc, quantitative_metrics)
-
-# 6. 저장
-doc.save(f"outputs/{patent_number}_report.docx")
-```
-
-**포맷팅**:
-- 스타일: Heading 1~3, Normal, List Bullet
-- 색상: 성공(녹색), 경고(주황), 위험(빨강)
-- 표: 3열 구조 (지표명, 측정값, 평가)
 
 ---
 
@@ -389,9 +240,7 @@ except Exception as e:
 
 ---
 
-## 🤝 Multi-Agent 협업구조
-
-### Agent 역할 및 책임
+## Agent 역할 및 책임
 
 #### 1️. TechnologyAgent (기술성 평가)
 
@@ -427,30 +276,6 @@ except Exception as e:
 4. 점수 집계
    └─ (정량 60% + 정성 40%)
 ```
-
-**출력**:
-```python
-{
-    "tech_score": 82.5,
-    "tech_metrics": {
-        "X7_drawing_count": 3,
-        "X8_title_length": 27,
-        "X9_claim_series": 15
-    },
-    "tech_qualitative": {
-        "innovation_summary": "LLM과 RAG를 결합한 혁신적...",
-        "implementation_summary": "15개 청구항과 3개 도면으로...",
-        "differentiation_summary": "선행기술 대비 컨텍스트 이해도가...",
-        "practicality_summary": "즉시 상용화 가능한 수준..."
-    },
-    "tech_binary": {
-        "has_multiple_drawings": true,
-        "has_proper_title_length": true,
-        "has_sufficient_claims": true
-    }
-}
-```
-
 ---
 
 #### 2. RightsAgent (권리성 평가)
@@ -488,33 +313,6 @@ except Exception as e:
    └─ (정량 70% + 정성 30%)
 ```
 
-**출력**:
-```python
-{
-    "rights_score": 78.3,
-    "rights_metrics": {
-        "X1_ipc_count": 2,
-        "X2_independent_claims": 3,
-        "X3_dependent_claims": 12,
-        "X4_total_claims": 15,
-        "X5_independent_avg_length": 287.5,
-        "X6_dependent_avg_length": 156.3
-    },
-    "rights_qualitative": {
-        "scope_summary": "IPC 2개 분류로 15개 청구항에 걸쳐...",
-        "robustness_summary": "독립항 평균 287자, 종속항 12개로...",
-        "avoidance_summary": "핵심 기술 요소를 3개 독립항으로..."
-    },
-    "rights_binary": {
-        "has_multiple_ipc": true,
-        "has_independent_claims": true,
-        "has_dependent_claims": true,
-        "has_sufficient_claims": true,
-        "has_proper_claim_length": true
-    }
-}
-```
-
 ---
 
 #### 3. MarketAgent (활용성 평가)
@@ -550,34 +348,6 @@ except Exception as e:
    
 5. 점수 집계
    └─ (정량 30% + 웹검색 40% + 정성 30%)
-```
-
-**출력**:
-```python
-{
-    "market_score": 87.5,
-    "market_metrics": {
-        "X10_inventor_count": 2,
-        "applicant": "삼성생명보험주식회사",
-        "ipc_count": 2
-    },
-    "market_web_search": {
-        "applicant_grade": "A",
-        "applicant_summary": "삼성생명보험은 국내 1위...",
-        "tech_grade": "High",
-        "tech_summary": "AI 기반 고객 서비스는 고성장..."
-    },
-    "market_qualitative": {
-        "applicability_summary": "G06F 16/33 분야에서 즉시 적용...",
-        "market_fit_summary": "A 등급 출원인의 기술로서 High 성장성...",
-        "commercialization_summary": "상용화 단계로 진행 가능..."
-    },
-    "market_binary": {
-        "has_multiple_inventors": true,
-        "has_known_applicant": true,
-        "has_ipc_classification": true
-    }
-}
 ```
 
 ---
@@ -978,54 +748,6 @@ prompts/
 - 예시
 
 ---
-
-
-
-## 📂 Directory Structure
-
-PatentEvalAIAgent/
-├── data/                          # 특허 PDF 파일
-│   ├── patent1samsung.pdf
-│   ├── patent2yanolja.pdf
-│   └── patent3kakaobank.pdf
-│
-├── agents/                        # 평가 에이전트 모듈
-│   ├── __init__.py
-│   ├── tech_agent.py             # 기술성 평가 (v5.0)
-│   ├── rights_agent.py           # 권리성 평가 (v5.0)
-│   └── market_agent.py           # 활용성 평가 (v5.0)
-│
-├── prompts/                       # 프롬프트 템플릿
-│   ├── tech_eval.txt
-│   ├── rights_eval.txt
-│   └── market_eval.txt
-│
-├── config/                        # 설정 파일
-│   ├── __init__.py
-│   ├── weights.py
-│   └── patents.py
-│
-├── utils/                         # 유틸리티 모듈
-│   ├── __init__.py
-│   ├── pdf_processor.py
-│   ├── rag_manager.py
-│   ├── visualizer.py
-│   └── docx_generator.py
-│
-├── outputs/                       # 평가 결과 저장
-│   ├── {patent_number}_report.docx
-│   ├── {patent_number}_bar_chart.png
-│   ├── {patent_number}_radar_chart.png
-│   └── {patent_number}_evaluation_v2.json
-│
-├── faiss_index/                   # FAISS 벡터 인덱스
-│   ├── index.faiss
-│   └── index.pkl
-│
-├── main.py
-├── pyproject.toml
-├── .env
-└── README.md
 
 ## Architecture
 <img width="637" height="1134" alt="image" src="https://github.com/user-attachments/assets/05160b4d-5300-4a43-b344-b45658b85a2e" />
